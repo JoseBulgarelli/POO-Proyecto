@@ -6,6 +6,7 @@ public class Cliente {
 	private String nombre;
 	private String telefono;
 	private String email;
+	private ArrayList<Prestamo> prestamos;
 	
 	private Boolean esTelefonoValido(String telefono) {
 		return true;
@@ -16,31 +17,41 @@ public class Cliente {
 	}
 	
 	public Cliente(String nombre, String telefono, String email) {
-		
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.email = email;
 	}
 	
-	public void modificarCliente(String cliente, ArrayList<Prestamo> prestamos) {
-		
+	public void modificarCliente(String nombre, String telefono, String email, ArrayList<Prestamo> prestamos) {
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.email = email;
+		this.prestamos = prestamos;
 	}
 	
-	public void consultarCliente() {
-		
+	public String consultarCliente() {
+		return "Nombre del cliente: " + nombre +
+				"\nTelefono del cliente: " + telefono +
+				"\nEmail del cliente: " + email +
+				"\nPrestamos del cliente: " + prestamos;
 	}
 	
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public void setNombre() {
-		
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
-	public void agregarPrestamo(Prestamo prestamo) {
-		
+	public Prestamo hacerPrestamo(Cliente clientePrestamo, ArrayList<Item> items) {
+		Prestamo p = new Prestamo(clientePrestamo, items);
+		prestamos.add(p);
+		return p;
 	}
 	
 	public void eliminarPrestamo(Prestamo prestamo) {
-		
+		prestamos.remove(prestamo);
 	}
 	
 	public String getTelefono() {
@@ -48,7 +59,7 @@ public class Cliente {
 	}
 	
 	public void setTelefono(String telefono) {
-		
+		this.telefono = telefono;
 	}
 	
 	public String getEmail() {
@@ -56,7 +67,7 @@ public class Cliente {
 	}
 	
 	public void setEmail(String email) {
-		
+		this.email = email;
 	}
 	
 }

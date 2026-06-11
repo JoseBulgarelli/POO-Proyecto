@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class Tipo {
 	private String nombre;
+	private ArrayList<Item> items;
 	
-	Tipo(String nombre) {
+	public Tipo(String nombre) {
 		
 	}
 	

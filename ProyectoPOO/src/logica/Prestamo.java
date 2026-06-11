@@ -8,6 +8,8 @@ public class Prestamo {
 	private LocalDateTime alerta;
 	private int intervalo;
 	private LocalDateTime fechaDeCreacion;
+	private Cliente clientePrestamo;
+	private ArrayList<Item> itemsPrestameados;
 	
 	public Prestamo(Cliente clientePrestamo, ArrayList<Item> items) {
 		

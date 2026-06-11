@@ -7,6 +7,8 @@ public class Item {
 	private int codigo;
 	private String descripcion;
 	private Tipo tipo;
+	private Prestamo prestamo;
+	private ArrayList<Categoria> categorias;
 	
 	public Item(String nombre, ArrayList<Categoria> categorias, Tipo tipo) {
 		

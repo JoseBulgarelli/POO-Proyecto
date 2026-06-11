@@ -9,25 +9,50 @@ import logica.Prestamo;
 import logica.Tipo;
 
 public class Controladora {
+	private static Controladora instance = null;
+	private ArrayList<Categoria> categorias;
+	private ArrayList<Tipo> tipos;
+	private ArrayList<Item> items;
+	private ArrayList<Prestamo> prestamos;
+	private ArrayList<Cliente> clientes;
+	
+	private Controladora() {
+		categorias = new ArrayList<Categoria>();
+		tipos = new ArrayList<Tipo>();
+		items = new ArrayList<Item>();
+		prestamos = new ArrayList<Prestamo>();
+		clientes = new ArrayList<Cliente>();
+	}
+	
+	public static Controladora getInstance() {
+		if (instance == null) {
+			instance = new Controladora();
+		}
+		return instance;
+	}
 
 	public void crearItem(String nombre, ArrayList<Categoria> categorias, Tipo tipo) {
 		
 	}
 	
-	public void crearCliente(String nombre) {
-		
+	public void crearCliente(String nombre, String telefono, String email) {
+		Cliente c = new Cliente(nombre, telefono, email);
+		clientes.add(c);
 	}
 	
 	public void crearCategoria(String nombre) {
-		
+		Categoria c = new Categoria(nombre);
+		categorias.add(c);
 	}
 	
 	public void crearTipo(String nombre) {
-		
+		Tipo t = new Tipo(nombre);
+		tipos.add(t);
 	}
 	
-	public void crearPrestamo(Cliente clientePrestamo, ArrayList<Item> items) {
-		
+	public void hacerPrestamo(Cliente clientePrestamo, ArrayList<Item> items) {
+		Prestamo p = clientePrestamo.hacerPrestamo(clientePrestamo, items);
+		prestamos.add(p);
 	}
 	
 	public void agregarCategoria(Categoria categoria) {
@@ -38,11 +63,15 @@ public class Controladora {
 		
 	}
 	
-	public void agregarItem(Item item) {
+	public void agregarItemAPrestamo(Item item, Prestamo prestamo) {
 		
 	}
 	
-	public void eliminarItem(String nombre) {
+	public void eliminarPrestamo(Prestamo prestamo, Cliente clientePrestamo) {
+		clientePrestamo.eliminarPrestamo(prestamo);
+	}
+	
+	public void eliminarItemDePrestamo(String nombre, Prestamo prestamo) {
 		
 	}
 	
@@ -90,12 +119,12 @@ public class Controladora {
 		
 	}
 	
-	public void devolverItem(Item item) {
+	public void devolverItemDePrestamo(Item item, Prestamo prestamo) {
 		
 	}
 	
 	public ArrayList<Tipo> getListaTipos() {
-		
+		return 
 	}
 	
 	public ArrayList<Cliente> getListaClientes() {
@@ -110,19 +139,19 @@ public class Controladora {
 		
 	}
 	
-	public void consultarItem() {
+	public String consultarItem() {
 		
 	}
 	
-	public void consultarCliente() {
+	public String consultarCliente() {
 		
 	}
 	
-	public void consultarCategoria() {
+	public String consultarCategoria() {
 		
 	}
 	
-	public void consultarTipo() {
+	public String consultarTipo() {
 		
 	}
 	
