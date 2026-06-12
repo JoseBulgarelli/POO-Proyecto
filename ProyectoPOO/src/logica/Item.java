@@ -10,11 +10,11 @@ public class Item {
 	private Prestamo prestamo;
 	private ArrayList<Categoria> categorias;
 	
-	public Item(String nombre, ArrayList<Categoria> categorias, Tipo tipo, String descripcion) {
+	public Item(String nombre, Tipo tipo, String descripcion, int codigo) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.categorias = categorias;
 		this.tipo = tipo;
+		this.codigo = codigo;
 	}
 	
 	public void modificarItem(String nombre, ArrayList<Categoria> categorias, Tipo tipo, String descripcion) {

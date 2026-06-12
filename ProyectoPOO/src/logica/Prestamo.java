@@ -56,4 +56,8 @@ public class Prestamo {
 	public void setFechaDeCreacion(LocalDateTime fechaDeCreacion) {
 		this.fechaDeCreacion = fechaDeCreacion;
 	}
+	
+	public ArrayList<Item> getItemsPrestameados() {
+		return itemsPrestameados;
+	}
 }
