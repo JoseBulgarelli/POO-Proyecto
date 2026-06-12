@@ -12,7 +12,9 @@ public class Prestamo {
 	private ArrayList<Item> itemsPrestameados;
 	
 	public Prestamo(Cliente clientePrestamo, ArrayList<Item> items) {
-		
+		this.clientePrestamo = clientePrestamo;
+		this.itemsPrestameados = items;
+		fechaDeCreacion = LocalDateTime.now();
 	}
 	
 	public void alertaRecurrente() {
@@ -24,27 +26,27 @@ public class Prestamo {
 	}
 	
 	public void agregarItem(Item item) {
-		
+		itemsPrestameados.add(item);
 	}
 	
 	public void eliminarItem(Item item) {
-		
+		itemsPrestameados.remove(item);
 	}
 	
 	public Cliente getClientePrestamo() {
-		
+		return clientePrestamo;
 	}
 	
 	public void setClientePrestamo(Cliente clientePrestamo) {
-		
+		this.clientePrestamo = clientePrestamo;
 	}
 	
-	public void getIntervalo() {
-		
+	public int getIntervalo() {
+		return intervalo;
 	}
 	
-	public void setIntervalo() {
-		
+	public void setIntervalo(int intervalo) {
+		this.intervalo = intervalo;
 	}
 	
 	public LocalDateTime getFechaDeCreacion() {
@@ -52,15 +54,6 @@ public class Prestamo {
 	}
 	
 	public void setFechaDeCreacion(LocalDateTime fechaDeCreacion) {
-		
+		this.fechaDeCreacion = fechaDeCreacion;
 	}
-	
-	public void agregarItemPrestameado(Item item) {
-		
-	}
-
-	public void eliminarItemPrestameado(Item item) {
-		
-	}
-	
 }

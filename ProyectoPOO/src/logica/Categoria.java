@@ -11,15 +11,21 @@ public class Categoria {
 	}
 	
 	public void modificarCategoria(String nombre, ArrayList<Item> items) {
-		
+		this.nombre = nombre;
+		this.items = items;
 	}
 	
-	public void consultarCategoria() {
-		
+	public String consultarCategoria() {
+		return "Nombre de la categoria: " + nombre +
+				"Items que pertenecen a la categoria: " + items;
 	}
 	
-	public void borrarItem(Item item) {
-		
+	public void agregarItemALaCategoria(Item item) {
+		items.add(item);
+	}
+	
+	public void borrarItemDeLaCategoria(Item item) {
+		items.remove(item);
 	}
 	
 	public String getNombre() {
@@ -27,15 +33,15 @@ public class Categoria {
 	}
 	
 	public void setNombre(String nombre) {
-		
+		this.nombre = nombre;
 	}
 	
 	public ArrayList<Item> getItems() {
-		
+		return items;
 	}
 	
 	public void setItems(ArrayList<Item> items) {
-		
+		this.items = items;
 	}
 	
 }

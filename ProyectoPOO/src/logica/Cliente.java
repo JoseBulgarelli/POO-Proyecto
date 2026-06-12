@@ -44,8 +44,8 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 	
-	public Prestamo hacerPrestamo(Cliente clientePrestamo, ArrayList<Item> items) {
-		Prestamo p = new Prestamo(clientePrestamo, items);
+	public Prestamo hacerPrestamo(ArrayList<Item> items) {
+		Prestamo p = new Prestamo(this, items);
 		prestamos.add(p);
 		return p;
 	}
