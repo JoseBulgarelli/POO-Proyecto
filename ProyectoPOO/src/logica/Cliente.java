@@ -22,11 +22,10 @@ public class Cliente {
 		this.email = email;
 	}
 	
-	public void modificarCliente(String nombre, String telefono, String email, ArrayList<Prestamo> prestamos) {
+	public void modificarCliente(String nombre, String telefono, String email) {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
-		this.prestamos = prestamos;
 	}
 	
 	public String consultarCliente() {
@@ -44,8 +43,8 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 	
-	public Prestamo hacerPrestamo(ArrayList<Item> items) {
-		Prestamo p = new Prestamo(this, items);
+	public Prestamo hacerPrestamo() {
+		Prestamo p = new Prestamo(this);
 		prestamos.add(p);
 		return p;
 	}
@@ -68,6 +67,10 @@ public class Cliente {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public ArrayList<Prestamo> getPrestamos() {
+		return prestamos;
 	}
 	
 }

@@ -10,9 +10,8 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 	
-	public void modificarCategoria(String nombre, ArrayList<Item> items) {
+	public void modificarCategoria(String nombre) {
 		this.nombre = nombre;
-		this.items = items;
 	}
 	
 	public String consultarCategoria() {

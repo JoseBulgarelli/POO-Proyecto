@@ -21,7 +21,7 @@ public class Item {
 		this.nombre = nombre;
 		this.categorias = categorias;
 		this.tipo = tipo;
-		this.descripcion = descripcion;
+		this.descripcion = descripcion;  // No tengo muy claro esto, deberia verlo con la interfaz
 	}
 	
 	public String consultarItem() {
@@ -66,6 +66,10 @@ public class Item {
 	
 	public void setPrestamo(Prestamo prestamo) {
 		this.prestamo = prestamo;
+	}
+	
+	public int getCodigo() {
+		return codigo;
 	}
 
 }

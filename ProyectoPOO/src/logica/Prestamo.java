@@ -10,11 +10,12 @@ public class Prestamo {
 	private LocalDateTime fechaDeCreacion;
 	private Cliente clientePrestamo;
 	private ArrayList<Item> itemsPrestameados;
+	private Boolean enCreacion;
 	
-	public Prestamo(Cliente clientePrestamo, ArrayList<Item> items) {
+	public Prestamo(Cliente clientePrestamo) {
 		this.clientePrestamo = clientePrestamo;
-		this.itemsPrestameados = items;
 		fechaDeCreacion = LocalDateTime.now();
+		enCreacion = true;
 	}
 	
 	public void alertaRecurrente() {
@@ -59,5 +60,13 @@ public class Prestamo {
 	
 	public ArrayList<Item> getItemsPrestameados() {
 		return itemsPrestameados;
+	}
+	
+	public void finalizarPrestamo() {
+		enCreacion = false;
+	}
+	
+	public Boolean getEnCreacion() {
+		return enCreacion;
 	}
 }

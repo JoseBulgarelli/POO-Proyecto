@@ -10,7 +10,7 @@ public class Tipo {
 		this.nombre = nombre;
 	}
 	
-	public void modificarTipo(String nombre, ArrayList<Item> items) {
+	public void modificarTipo(String nombre) {
 		this.nombre = nombre;
 		this.items = items;
 	}
