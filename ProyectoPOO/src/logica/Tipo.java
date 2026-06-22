@@ -12,7 +12,6 @@ public class Tipo {
 	
 	public void modificarTipo(String nombre) {
 		this.nombre = nombre;
-		this.items = items;
 	}
 	
 	public String consultarTipo() {

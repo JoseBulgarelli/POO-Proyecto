@@ -147,7 +147,7 @@ public class Controladora {
 	
 	public void modificarCategoria(int cateIndex, String nombre) throws Exception {
 		if (categorias.size() <= cateIndex) {
-			throw new Exception("Ese cliente no existe en el sistema");
+			throw new Exception("Ese categoria no existe en el sistema");
 		}
 		Categoria viejaCate = categorias.get(cateIndex);
 		Categoria nuevaCate = viejaCate;
@@ -165,7 +165,7 @@ public class Controladora {
 	
 	public void borrarCategoria(int cateIndex) throws Exception {
 		if (categorias.size() <= cateIndex) {
-			throw new Exception("Ese cliente no existe en el sistema");
+			throw new Exception("Ese categoria no existe en el sistema");
 		}
 		Categoria cateEC = categorias.get(cateIndex);
 		categorias.remove(cateEC);
@@ -180,7 +180,7 @@ public class Controladora {
 	
 	public String consultarCategoria(int cateIndex) throws Exception {
 		if (categorias.size() <= cateIndex) {
-			throw new Exception("Ese cliente no existe en el sistema");
+			throw new Exception("Ese categoria no existe en el sistema");
 		}
 		return categorias.get(cateIndex).consultarCategoria();  // Tengo que pensarme bien estos
 	}
@@ -323,3 +323,6 @@ public class Controladora {
 }  // Necesito otro dia para terminar esto de fijo
 
 // Lo obtuve, further changes seran para la interfaz!!
+
+
+// Importante encontrar una forma de que todos siempre se refieran al mismo objeto, porque si por algo que exista hay que hacerlo y modificarlo 3 veces en todo lado sera molesto
