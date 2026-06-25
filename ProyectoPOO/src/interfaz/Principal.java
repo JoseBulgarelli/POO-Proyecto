@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import control.Controladora;
 
 public class Principal {
 
@@ -29,6 +31,61 @@ public class Principal {
 			}
 		});
 	}
+	
+	private void adminItems() {
+		AdminItems ventanaAdminItems = new AdminItems();
+		ventanaAdminItems.setVisible(true);
+	}
+	
+	private void adminClientes() {
+		AdminClientes ventanaAdminClientes = new AdminClientes();
+		ventanaAdminClientes.setVisible(true);
+	}
+	
+	private void adminCategorias() {
+		AdminCategorias ventanaAdminCategorias = new AdminCategorias();
+		ventanaAdminCategorias.setVisible(true);
+	}
+	
+	private void adminTipos() {
+		AdminTipos ventanaAdminTipos = new AdminTipos();
+		ventanaAdminTipos.setVisible(true);
+	}
+	
+	private void vNuevoPrestamo() {
+		NuevoPrestamo ventanaNuevoPrestamo = new NuevoPrestamo();
+		ventanaNuevoPrestamo.setVisible(true);
+	}
+	
+	private void vModificarPrestamo() {
+		ModificarPrestamo ventanaModificarPrestamo = new ModificarPrestamo();
+		ventanaModificarPrestamo.setVisible(true);
+	}
+	
+	private void vFinalizarPrestamo() {
+		FinalizarPrestamo ventanaFinalizarPrestamo = new FinalizarPrestamo();
+		ventanaFinalizarPrestamo.setVisible(true);
+	}
+	
+	private void vReporteItems() {
+		ReporteItems ventanaReporteItems = new ReporteItems();
+		ventanaReporteItems.setVisible(true);
+	}
+	
+	private void vReporteClientes() {
+		ReporteClientes ventanaReporteClientes = new ReporteClientes();
+		ventanaReporteClientes.setVisible(true);
+	}
+	
+	private void vReporteCategorias() {
+		ReporteCategorias ventanaReporteCategorias = new ReporteCategorias();
+		ventanaReporteCategorias.setVisible(true);
+	}
+	
+	private void vReporteTipos() {
+		ReporteTipos ventanaReporteTipos = new ReporteTipos();
+		ventanaReporteTipos.setVisible(true);
+	}
 
 	/**
 	 * Create the application.
@@ -42,7 +99,7 @@ public class Principal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 547, 358);
+		frame.setBounds(100, 100, 421, 268);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -53,20 +110,44 @@ public class Principal {
 		tabbedPane.addTab("Administración", null, administracionP, null);
 		administracionP.setLayout(null);
 		
-		JButton btnItems = new JButton("Items");
-		btnItems.setBounds(10, 10, 84, 21);
-		administracionP.add(btnItems);
+		JButton btnItemsAd = new JButton("Items");
+		btnItemsAd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adminItems();
+			}
+		});
+		btnItemsAd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnItemsAd.setBounds(10, 10, 134, 50);
+		administracionP.add(btnItemsAd);
 		
 		JButton btnClienteAd = new JButton("Clientes");
-		btnClienteAd.setBounds(10, 41, 84, 20);
+		btnClienteAd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				adminClientes();
+			}
+		});
+		btnClienteAd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnClienteAd.setBounds(193, 10, 134, 50);
 		administracionP.add(btnClienteAd);
 		
 		JButton btnCategoriasAd = new JButton("Categorias");
-		btnCategoriasAd.setBounds(10, 71, 84, 20);
+		btnCategoriasAd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vReporteCategorias();
+			}
+		});
+		btnCategoriasAd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCategoriasAd.setBounds(193, 87, 134, 50);
 		administracionP.add(btnCategoriasAd);
 		
 		JButton btnTiposAd = new JButton("Tipos");
-		btnTiposAd.setBounds(10, 101, 84, 20);
+		btnTiposAd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vReporteTipos();
+			}
+		});
+		btnTiposAd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTiposAd.setBounds(10, 87, 134, 50);
 		administracionP.add(btnTiposAd);
 		
 		JPanel prestamosP = new JPanel();
@@ -74,15 +155,33 @@ public class Principal {
 		prestamosP.setLayout(null);
 		
 		JButton btnNuevoPrestamo = new JButton("Nuevo");
-		btnNuevoPrestamo.setBounds(10, 24, 84, 20);
+		btnNuevoPrestamo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vNuevoPrestamo();
+			}
+		});
+		btnNuevoPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNuevoPrestamo.setBounds(10, 24, 136, 58);
 		prestamosP.add(btnNuevoPrestamo);
 		
 		JButton btnModificarPrestamo = new JButton("Modificar");
-		btnModificarPrestamo.setBounds(10, 66, 84, 20);
+		btnModificarPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnModificarPrestamo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vModificarPrestamo();
+			}
+		});
+		btnModificarPrestamo.setBounds(193, 24, 136, 58);
 		prestamosP.add(btnModificarPrestamo);
 		
 		JButton btnFinalizarPrestamo = new JButton("Finalizar");
-		btnFinalizarPrestamo.setBounds(10, 108, 84, 20);
+		btnFinalizarPrestamo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vFinalizarPrestamo();
+			}
+		});
+		btnFinalizarPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnFinalizarPrestamo.setBounds(10, 108, 136, 58);
 		prestamosP.add(btnFinalizarPrestamo);
 		
 		JPanel reportesP = new JPanel();
@@ -90,19 +189,43 @@ public class Principal {
 		reportesP.setLayout(null);
 		
 		JButton btnItemsReporte = new JButton("Items");
-		btnItemsReporte.setBounds(10, 10, 84, 20);
+		btnItemsReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vReporteItems();
+			}
+		});
+		btnItemsReporte.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnItemsReporte.setBounds(10, 10, 156, 64);
 		reportesP.add(btnItemsReporte);
 		
 		JButton btnClientesReporte = new JButton("Clientes");
-		btnClientesReporte.setBounds(10, 52, 84, 20);
+		btnClientesReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vReporteClientes();
+			}
+		});
+		btnClientesReporte.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnClientesReporte.setBounds(197, 10, 156, 64);
 		reportesP.add(btnClientesReporte);
 		
 		JButton btnCategoriasReporte = new JButton("Categorias");
-		btnCategoriasReporte.setBounds(10, 98, 84, 20);
+		btnCategoriasReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vReporteCategorias();
+			}
+		});
+		btnCategoriasReporte.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCategoriasReporte.setBounds(10, 98, 156, 64);
 		reportesP.add(btnCategoriasReporte);
 		
 		JButton btnTiposReporte = new JButton("Tipos");
-		btnTiposReporte.setBounds(10, 145, 84, 20);
+		btnTiposReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vReporteTipos();
+			}
+		});
+		btnTiposReporte.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnTiposReporte.setBounds(197, 98, 156, 64);
 		reportesP.add(btnTiposReporte);
 	}
 }
