@@ -319,6 +319,28 @@ public class Controladora {
 	public String reporteTipos() {
 		return tipos.toString();
 	}
+
+	public ArrayList<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public ArrayList<Tipo> getTipos() {
+		return tipos;
+	}
+
+	public ArrayList<Item> getItems() {
+		return items;
+	}
+
+	public ArrayList<Prestamo> getPrestamos() {
+		return prestamos;
+	}
+
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+	
+	
 	
 }  // Necesito otro dia para terminar esto de fijo
 
