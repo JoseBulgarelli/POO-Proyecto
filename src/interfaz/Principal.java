@@ -209,8 +209,13 @@ public class Principal {
 	}
 	
 	private void vConsultarItem() {
-		ConsultarItem ventanaConsultarItem = new ConsultarItem();
-		ventanaConsultarItem.setVisible(true);
+		int filer = itemsTabla.getSelectedRow();
+		if (filer == -1) {
+			JOptionPane.showMessageDialog(frame, "Debe seleccionar un item!!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			ConsultarItem ventanaConsultarItem = new ConsultarItem(filer);
+			ventanaConsultarItem.setVisible(true);
+		}
 	}
 	
 	private void showearClientes() {
@@ -263,8 +268,13 @@ public class Principal {
 	}
 	
 	private void vConsultarCliente() {
-		ConsultarCliente ventanaConsultarCliente = new ConsultarCliente();
-		ventanaConsultarCliente.setVisible(true);
+		int filer = clientesTabla.getSelectedRow();
+		if (filer == -1) {
+			JOptionPane.showMessageDialog(frame, "Debe seleccionar un cliente!!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			ConsultarCliente ventanaConsultarCliente = new ConsultarCliente(filer);
+			ventanaConsultarCliente.setVisible(true);
+		}
 	}
 	
 	private void showearCategorias() {
@@ -313,8 +323,13 @@ public class Principal {
 	}
 	
 	private void vConsultarCategoria() {
-		ConsultarCategoria ventanaConsultarCategoria = new ConsultarCategoria();
-		ventanaConsultarCategoria.setVisible(true);
+		int filer = categoriasTabla.getSelectedRow();
+		if (filer == -1) {
+			JOptionPane.showMessageDialog(frame, "Debe seleccionar un categoria!!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			ConsultarCategoria ventanaConsultarCategoria = new ConsultarCategoria(filer);
+			ventanaConsultarCategoria.setVisible(true);
+		}
 	}
 	
 	private void showearTipos() {
@@ -363,8 +378,13 @@ public class Principal {
 	}
 	
 	private void vConsultarTipo() {
-		ConsultarTipo ventanaConsultarTipo = new ConsultarTipo();
-		ventanaConsultarTipo.setVisible(true);
+		int filer = tiposTabla.getSelectedRow();
+		if (filer == -1) {
+			JOptionPane.showMessageDialog(frame, "Debe seleccionar un tipos!!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			ConsultarTipo ventanaConsultarTipo = new ConsultarTipo(filer);
+			ventanaConsultarTipo.setVisible(true);
+		}
 	}
 	
 	

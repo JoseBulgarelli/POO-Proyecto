@@ -8,6 +8,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import control.Controladora;
+import logica.Categoria;
+import logica.Tipo;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class ConsultarTipo extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +25,7 @@ public class ConsultarTipo extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			ConsultarTipo dialog = new ConsultarTipo();
+			ConsultarTipo dialog = new ConsultarTipo(0);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,28 +36,43 @@ public class ConsultarTipo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ConsultarTipo() {
+	public ConsultarTipo(int filer) {
 		setResizable(false);
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		Controladora control = Controladora.getInstance();
+		Tipo tipoEC = control.getTipos().get(filer);
+		
+		{
+			JLabel tipoName = new JLabel("Nombre: " + tipoEC.getNombre());
+			tipoName.setBounds(21, 23, 405, 35);
+			contentPanel.add(tipoName);
+		}
+		{
+			JLabel tipoItems = new JLabel("Items con este tipo: " + tipoEC.getItemName());
+			tipoItems.setBounds(21, 82, 405, 35);
+			contentPanel.add(tipoItems);
+		}
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Salir");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
 			}
 		}
 	}

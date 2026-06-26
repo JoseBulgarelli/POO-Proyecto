@@ -40,4 +40,17 @@ public class Tipo implements Serializable {
 	public void eliminarItem(Item item) {
 		items.remove(item);
 	}
+	
+	public String getItemName() {
+		String itemsN = "";
+		for (int i = 0; items.size() > i; i++) {
+			itemsN += items.get(i).getNombre();
+			if (i == items.size()-1) {
+				itemsN += ".";
+			} else {
+				itemsN += ", ";
+			}
+		}
+		return itemsN;
+	}
 }

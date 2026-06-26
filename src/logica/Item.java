@@ -73,5 +73,9 @@ public class Item implements Serializable {
 	public int getCodigo() {
 		return codigo;
 	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
 
 }
