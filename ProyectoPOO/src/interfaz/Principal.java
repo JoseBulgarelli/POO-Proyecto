@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ import logica.Item;
 import logica.Tipo;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ComponentAdapter;
@@ -92,7 +94,7 @@ public class Principal {
 		for (Item item : listaItems) {
 			String nombrePrestamo;
 			if (item.getPrestamo() == null) {
-				nombrePrestamo = "No esta en un prestamo.";
+				nombrePrestamo = "No esta en un prestamo";
 			}
 			else {
 				nombrePrestamo = item.getPrestamo().getClientePrestamo().getNombre();
@@ -103,8 +105,13 @@ public class Principal {
 	}
 	
 	private void vCrearItem() {
-		CrearItem ventanaCrearItem = new CrearItem();
-		ventanaCrearItem.setVisible(true);
+		Controladora control = Controladora.getInstance();
+		if (control.getTipos().size() <= 0) {
+			JOptionPane.showMessageDialog(frame, "Debe haber al menos un tipo en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			CrearItem ventanaCrearItem = new CrearItem();
+			ventanaCrearItem.setVisible(true);	
+		}
 	}
 	
 	private void vModificarItem() {
@@ -113,8 +120,25 @@ public class Principal {
 	}
 	
 	private void vBorrarItem() {
-		BorrarItem ventanaBorrarItem = new BorrarItem();
-		ventanaBorrarItem.setVisible(true);
+		DefaultTableModel model = (DefaultTableModel) itemsTabla.getModel();
+		int filer = itemsTabla.getSelectedRow();
+		if (filer == -1) {
+			JOptionPane.showMessageDialog(frame, "Debe seleccionar un item!!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			if (model.getValueAt(filer, 3) != "No esta en un prestamo") {
+				JOptionPane.showMessageDialog(frame, "Este item esta en un prestamo, no se puede borrar", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				int respuesta = JOptionPane.showConfirmDialog(frame, "Se eliminara " + model.getValueAt(filer,0).toString(), "Borrar?", JOptionPane.YES_NO_OPTION);
+				if (respuesta == JOptionPane.YES_OPTION) {
+					Controladora control = Controladora.getInstance();
+					try {
+						control.borrarItem(filer);
+					} catch (Exception StarWalker) {
+						JOptionPane.showMessageDialog(frame, "Error al borrar!", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		}
 	}
 	
 	private void vConsultarItem() {
@@ -139,6 +163,24 @@ public class Principal {
 		}
 	}
 	
+	private void vCrearCliente() {
+		CrearCliente ventanaCrearCliente = new CrearCliente();
+		ventanaCrearCliente.setVisible(true);
+	}
+	
+	private void vModificarCliente() {
+		ModificarCliente ventanaModificarCliente = new ModificarCliente();
+		ventanaModificarCliente.setVisible(true);
+	}
+	
+	private void vBorrarCliente() {
+	}
+	
+	private void vConsultarCliente() {
+		ConsultarCliente ventanaConsultarCliente = new ConsultarCliente();
+		ventanaConsultarCliente.setVisible(true);
+	}
+	
 	private void showearCategorias() {
 		Controladora control = Controladora.getInstance();
 		DefaultTableModel model = (DefaultTableModel) categoriasTabla.getModel();
@@ -154,6 +196,26 @@ public class Principal {
 			Object[] fila = new Object[] {categoria.getNombre(), cantidadItems};
 			model.addRow(fila);
 		}
+	}
+	
+	private void vCrearCategoria() {
+		CrearCategoria ventanaCrearCategoria = new CrearCategoria();
+		ventanaCrearCategoria.setVisible(true);
+	}
+	
+	private void vModificarCategoria() {
+		ModificarCategoria ventanaModificarCategoria = new ModificarCategoria();
+		ventanaModificarCategoria.setVisible(true);
+	}
+	
+	private void vBorrarCategoria() {
+		BorrarCategoria ventanaBorrarCategoria = new BorrarCategoria();
+		ventanaBorrarCategoria.setVisible(true);
+	}
+	
+	private void vConsultarCategoria() {
+		ConsultarCategoria ventanaConsultarCategoria = new ConsultarCategoria();
+		ventanaConsultarCategoria.setVisible(true);
 	}
 	
 	private void showearTipos() {
@@ -184,14 +246,29 @@ public class Principal {
 	}
 	
 	private void vBorrarTipo() {
-		BorrarTipo ventanaBorrarTipo = new BorrarTipo();
-		ventanaBorrarTipo.setVisible(true);
+		DefaultTableModel model = (DefaultTableModel) tiposTabla.getModel();
+		int filer = tiposTabla.getSelectedRow();
+		if (filer == -1) {
+			JOptionPane.showMessageDialog(frame, "Debe seleccionar un tipo!!", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int respuesta = JOptionPane.showConfirmDialog(frame, "Se eliminara" + model.getValueAt(filer, 0).toString(), "Borrar?", JOptionPane.YES_NO_OPTION);
+			if (respuesta == JOptionPane.YES_OPTION) {
+				Controladora control = Controladora.getInstance();
+				try {
+					control.borrarTipo(filer);
+				} catch (Exception StarWalker) {
+					JOptionPane.showMessageDialog(frame, "Error al borrar!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
 	}
 	
 	private void vConsultarTipo() {
 		ConsultarTipo ventanaConsultarTipo = new ConsultarTipo();
 		ventanaConsultarTipo.setVisible(true);
 	}
+	
+	
 
 	/**
 	 * Create the application.
@@ -288,6 +365,9 @@ public class Principal {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		itemsTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		itemsTabla.getColumnModel().getColumn(0).setPreferredWidth(105);
 		itemsTabla.getColumnModel().getColumn(3).setPreferredWidth(137);
 		scrollPane.setViewportView(itemsTabla);
@@ -303,18 +383,42 @@ public class Principal {
 		ClientesPanel.setLayout(null);
 		
 		JButton btnCrearCliente = new JButton("Crear");
+		btnCrearCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vCrearCliente();
+				showearClientes();
+			}
+		});
 		btnCrearCliente.setBounds(376, 10, 103, 20);
 		ClientesPanel.add(btnCrearCliente);
 		
 		JButton btnModificarCliente = new JButton("Modificar");
+		btnModificarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vModificarCliente();
+				showearClientes();
+			}
+		});
 		btnModificarCliente.setBounds(376, 40, 103, 20);
 		ClientesPanel.add(btnModificarCliente);
 		
 		JButton btnBorrarCliente = new JButton("Borrar");
+		btnBorrarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vBorrarCliente();
+				showearClientes();
+			}
+		});
 		btnBorrarCliente.setBounds(376, 70, 103, 20);
 		ClientesPanel.add(btnBorrarCliente);
 		
 		JButton btnConsultarCliente = new JButton("Consultar");
+		btnConsultarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vConsultarCliente();
+				showearClientes();
+			}
+		});
 		btnConsultarCliente.setBounds(376, 100, 103, 20);
 		ClientesPanel.add(btnConsultarCliente);
 		
@@ -337,6 +441,9 @@ public class Principal {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		clientesTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		clientesTabla.getColumnModel().getColumn(3).setPreferredWidth(110);
 		scrollPane_2.setViewportView(clientesTabla);
 		
@@ -351,18 +458,42 @@ public class Principal {
 		CategoriasPanel.setLayout(null);
 		
 		JButton btnCrearCategoria = new JButton("Crear");
+		btnCrearCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vCrearCategoria();
+				showearCategorias();
+			}
+		});
 		btnCrearCategoria.setBounds(376, 10, 103, 20);
 		CategoriasPanel.add(btnCrearCategoria);
 		
 		JButton btnModificarCategoria = new JButton("Modificar");
+		btnModificarCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vModificarCategoria();
+				showearCategorias();
+			}
+		});
 		btnModificarCategoria.setBounds(376, 40, 103, 20);
 		CategoriasPanel.add(btnModificarCategoria);
 		
 		JButton btnBorrarCategoria = new JButton("Borrar");
+		btnBorrarCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vBorrarCategoria();
+				showearCategorias();
+			}
+		});
 		btnBorrarCategoria.setBounds(376, 70, 103, 20);
 		CategoriasPanel.add(btnBorrarCategoria);
 		
 		JButton btnConsultarCategoria = new JButton("Consultar");
+		btnConsultarCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vConsultarCategoria();
+				showearCategorias();
+			}
+		});
 		btnConsultarCategoria.setBounds(376, 100, 103, 20);
 		CategoriasPanel.add(btnConsultarCategoria);
 		
@@ -385,6 +516,9 @@ public class Principal {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		categoriasTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		categoriasTabla.getColumnModel().getColumn(0).setPreferredWidth(86);
 		categoriasTabla.getColumnModel().getColumn(1).setPreferredWidth(95);
 		scrollPane_3.setViewportView(categoriasTabla);
@@ -458,6 +592,9 @@ public class Principal {
 				return columnTypes[columnIndex];
 			}
 		});
+		
+		tiposTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		tiposTabla.getColumnModel().getColumn(1).setPreferredWidth(110);
 		scrollPane_1.setViewportView(tiposTabla);
 		

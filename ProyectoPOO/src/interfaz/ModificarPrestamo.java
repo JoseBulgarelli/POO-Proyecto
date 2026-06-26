@@ -30,6 +30,8 @@ public class ModificarPrestamo extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarPrestamo() {
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

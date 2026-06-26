@@ -30,6 +30,8 @@ public class ModificarCategoria extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarCategoria() {
+		setResizable(false);
+		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

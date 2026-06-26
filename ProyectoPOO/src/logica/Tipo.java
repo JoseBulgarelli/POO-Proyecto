@@ -8,6 +8,7 @@ public class Tipo {
 	
 	public Tipo(String nombre) {
 		this.nombre = nombre;
+		items = new ArrayList<>();
 	}
 	
 	public void modificarTipo(String nombre) {

@@ -16,6 +16,7 @@ public class Item {
 		this.tipo = tipo;
 		this.codigo = codigo;
 		prestamo = null;
+		categorias = new ArrayList<>();
 	}
 	
 	public void modificarItem(String nombre, ArrayList<Categoria> categorias, Tipo tipo, String descripcion) {

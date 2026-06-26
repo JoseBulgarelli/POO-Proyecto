@@ -8,6 +8,7 @@ public class Categoria {
 	
 	public Categoria(String nombre) {
 		this.nombre = nombre;
+		items = new ArrayList<>();
 	}
 	
 	public void modificarCategoria(String nombre) {

@@ -37,8 +37,8 @@ public class Controladora {
 			throw new Exception("No se puede añadir un item sin un tipo para asignarle");
 		}
 		Item i = new Item(nombre, tipos.get(tipoIndex), descripcion, codigoItem);
-		tipos.get(tipoIndex).agregarItem(i);
 		items.add(i);
+		tipos.get(tipoIndex).agregarItem(i);
 		codigoItem++;
 	}
 	
@@ -46,29 +46,7 @@ public class Controladora {
 		if (items.size() <= itemIndex) {  // Lo pongo por ponerlo porque en teoria ni puedes seleccionar uno erroneo (si funciona como yo creo que funciona)
 			throw new Exception("Ese item no existe en el sistema");
 		}
-		Item viejoItem = items.get(itemIndex);
-		Item nuevoItem = viejoItem;
-		nuevoItem.modificarItem(nombre, categorias, tipos.get(tipoIndex), descripcion);// No tengo claro como vamos a obtener la lista de categorias though
-		items.remove(itemIndex);
-		items.add(itemIndex, nuevoItem);
-		for (int i = 0; this.categorias.size() > i; i++) {
-			if (this.categorias.get(i).getItems().contains(viejoItem)) {
-				this.categorias.get(i).borrarItemDeLaCategoria(viejoItem);
-				this.categorias.get(i).agregarItemALaCategoria(this.items.get(itemIndex));
-			}
-		}
-		for (int i = 0; this.prestamos.size() > i; i++) {
-			if (this.prestamos.get(i).getItemsPrestameados().contains(viejoItem)) {
-				this.prestamos.get(i).eliminarItem(viejoItem);
-				this.prestamos.get(i).agregarItem(this.items.get(itemIndex));
-			}
-		}
-		for (int i = 0; this.tipos.size() > i; i++) {
-			if (this.tipos.get(i).getItems().contains(viejoItem)) {
-				this.tipos.get(i).eliminarItem(viejoItem);
-				this.tipos.get(i).agregarItem(this.items.get(itemIndex));
-			}
-		}
+		items.get(itemIndex).modificarItem(nombre, categorias, tipos.get(tipoIndex), descripcion);
 	}
 	
 	public void borrarItem(int itemIndex) throws Exception {
@@ -110,16 +88,7 @@ public class Controladora {
 		if (clientes.size() <= clienteIndex) {
 			throw new Exception("Ese cliente no existe en el sistema");
 		}
-		Cliente viejoCliente = clientes.get(clienteIndex);
-		Cliente nuevoCliente = viejoCliente;
-		nuevoCliente.modificarCliente(nombre, telefono, email);
-		clientes.remove(clienteIndex);
-		clientes.add(clienteIndex, nuevoCliente);
-		for (int i = 0; prestamos.size() > i; i++) {
-			if (prestamos.get(i).getClientePrestamo().equals(viejoCliente)) {
-				prestamos.get(i).setClientePrestamo(nuevoCliente);
-			}
-		}
+		clientes.get(clienteIndex).modificarCliente(nombre, telefono, email);
 	}
 	
 	public void borrarCliente(int clienteIndex) throws Exception {
@@ -149,18 +118,7 @@ public class Controladora {
 		if (categorias.size() <= cateIndex) {
 			throw new Exception("Ese categoria no existe en el sistema");
 		}
-		Categoria viejaCate = categorias.get(cateIndex);
-		Categoria nuevaCate = viejaCate;
-		nuevaCate.modificarCategoria(nombre);
-		categorias.remove(cateIndex);
-		categorias.add(cateIndex, nuevaCate);
-		for (int i = 0; items.size() > i; i++) {
-			if (items.get(i).getCategorias().contains(viejaCate)) {
-				ArrayList<Categoria> soyUnVago = items.get(i).getCategorias();  // Talvez hacerle a CADA CLASE funciones para quitar elementos de sus listas, para no tener que hacer esta chapuceria
-				soyUnVago.set(soyUnVago.indexOf(viejaCate), nuevaCate);
-				items.get(i).setCategorias(soyUnVago);
-			}
-		}
+		categorias.get(cateIndex).modificarCategoria(nombre);
 	}
 	
 	public void borrarCategoria(int cateIndex) throws Exception {
@@ -194,16 +152,7 @@ public class Controladora {
 		if (tipos.size() <= tipoIndex) {
 			throw new Exception("Ese tipo no existe en el sistema");
 		}
-		Tipo viejoTipo = tipos.get(tipoIndex);
-		Tipo nuevoTipo = viejoTipo;
-		nuevoTipo.modificarTipo(nombre);
-		tipos.remove(tipoIndex);
-		tipos.add(tipoIndex, nuevoTipo);
-		for (int i = 0; items.size() > i; i++) {
-			if (items.get(i).getTipo().equals(viejoTipo)) {
-				items.get(i).setTipo(nuevoTipo);
-			}
-		}
+		tipos.get(tipoIndex).modificarTipo(nombre);
 	}
 	
 	public void borrarTipo(int tipoIndex) throws Exception {

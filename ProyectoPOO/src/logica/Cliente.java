@@ -20,6 +20,7 @@ public class Cliente {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
+		prestamos = new ArrayList<>();
 	}
 	
 	public void modificarCliente(String nombre, String telefono, String email) {
