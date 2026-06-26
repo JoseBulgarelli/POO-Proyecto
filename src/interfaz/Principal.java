@@ -296,7 +296,7 @@ public class Principal {
 	
 	private void vBorrarCategoria() {
 		DefaultTableModel model = (DefaultTableModel) categoriasTabla.getModel();
-		int filer = model.getRowCount();
+		int filer = categoriasTabla.getSelectedRow();
 		if (filer == -1) {
 			JOptionPane.showMessageDialog(frame, "Debes seleccionar una categoria!!", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {

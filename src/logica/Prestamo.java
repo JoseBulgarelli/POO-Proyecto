@@ -1,9 +1,10 @@
 package logica;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Prestamo {
+public class Prestamo implements Serializable {
 	private int tipoDeAlerta;
 	private LocalDateTime alerta;
 	private int intervalo;

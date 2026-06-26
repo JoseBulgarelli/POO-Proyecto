@@ -40,19 +40,19 @@ public class CrearTipo extends JDialog {
 	public CrearTipo() {
 		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 314, 188);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		nuevoTipoName = new JTextField();
-		nuevoTipoName.setBounds(96, 39, 96, 18);
+		nuevoTipoName.setBounds(103, 39, 96, 18);
 		contentPanel.add(nuevoTipoName);
 		nuevoTipoName.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Nombre:");
-		lblNewLabel.setBounds(21, 42, 44, 12);
+		lblNewLabel.setBounds(21, 42, 72, 12);
 		contentPanel.add(lblNewLabel);
 		{
 			JPanel buttonPane = new JPanel();
