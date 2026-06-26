@@ -16,6 +16,7 @@ public class Prestamo {
 		this.clientePrestamo = clientePrestamo;
 		fechaDeCreacion = LocalDateTime.now();
 		enCreacion = true;
+		itemsPrestameados = new ArrayList<>();
 	}
 	
 	public void alertaRecurrente() {
@@ -28,6 +29,7 @@ public class Prestamo {
 	
 	public void agregarItem(Item item) {
 		itemsPrestameados.add(item);
+		item.agregarAPrestamo(this);
 	}
 	
 	public void eliminarItem(Item item) {

@@ -131,11 +131,15 @@ public class CrearItem extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Controladora control = Controladora.getInstance();
 						int filer = tiposTabla.getSelectedRow();
-						try {
-							control.crearItem(nuevoItemNombre.getText(), filer, nuevoItemDescripcion.getText());
-							dispose();
-						} catch (Exception StarWalker) {
-							JOptionPane.showMessageDialog(contentPanel, StarWalker, "Error", JOptionPane.ERROR_MESSAGE);
+						if (filer == -1) {
+							JOptionPane.showMessageDialog(contentPanel, "Seleccione un tipo!!", "Error", JOptionPane.ERROR_MESSAGE);
+						} else {
+							try {
+								control.crearItem(nuevoItemNombre.getText(), filer, nuevoItemDescripcion.getText());
+								dispose();
+							} catch (Exception StarWalker) {
+								JOptionPane.showMessageDialog(contentPanel, StarWalker, "Error", JOptionPane.ERROR_MESSAGE);
+							}
 						}
 					}
 				});

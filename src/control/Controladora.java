@@ -177,35 +177,23 @@ public class Controladora implements Serializable {
 	}
 	
 	public void hacerPrestamo(int clienteIndex) throws Exception {
-		if (items.isEmpty() || clientes.isEmpty()) {
-			throw new Exception("Se necesita al menos un item y un cliente en el sistema para realizar un prestamo");
+		if (clientes.isEmpty()) {
+			throw new Exception("Se necesita al menos un cliente en el sistema para realizar un prestamo");
 		}
 		if (clientes.size() <= clienteIndex) {
 			throw new Exception("Ese cliente no existe");
 		}
-		Cliente clienteP = clientes.get(clienteIndex);
-		Prestamo p = new Prestamo(clienteP);
-		prestamos.add(p);
-		clienteP.hacerPrestamo();
-		clientes.set(clienteIndex, clienteP);
+		prestamos.add(clientes.get(clienteIndex).hacerPrestamo());
 	}
 	
 	public void agregarItemAPrestamo(int itemIndex, int prestamoIndex) throws Exception {
-		Prestamo prestamoEC = prestamos.get(prestamoIndex);
-		if (!prestamoEC.getEnCreacion()) {
+		if (!prestamos.get(prestamoIndex).getEnCreacion()) {
 			throw new Exception("El prestamo debe estar en proceso de creacion");
 		}
 		if (items.isEmpty()) {
 			throw new Exception("No hay items en el sistema");
 		}
-		Item itemEC = items.get(itemIndex);
-		if (itemEC.getPrestamo() != null) {
-			throw new Exception("Ese item ya pertenece a un prestamo");
-		}
-		itemEC.setPrestamo(prestamoEC);
-		prestamoEC.agregarItem(itemEC);
-		items.set(itemIndex, itemEC);
-		prestamos.set(prestamoIndex, prestamoEC);
+		prestamos.get(prestamoIndex).agregarItem(items.get(itemIndex));
 	}
 	
 	public void eliminarItemDePrestamo(int itemIndex, int prestamoIndex) throws Exception {
@@ -246,14 +234,14 @@ public class Controladora implements Serializable {
 	
 	public void finalizarPrestamo(int prestamoIndex) throws Exception {
 		Prestamo prestamoEC = prestamos.get(prestamoIndex);
-		if (!prestamoEC.getEnCreacion()) {
-			throw new Exception("El prestamo debe estar en proceso de creacion");
-		}
 		for (int i = 0; items.size() > i; i++) {
 			if (items.get(i).getPrestamo().equals(prestamoEC)) {
-				Item itemEC = items.get(i);
-				itemEC.setPrestamo(null);
-				items.set(i, itemEC);
+				items.get(i).setPrestamo(null);
+			}
+		}
+		for (int i = 0; clientes.size() > i; i++) {
+			if (clientes.get(i) == prestamoEC.getClientePrestamo()) {
+				clientes.get(i).eliminarPrestamo(prestamoEC);
 			}
 		}
 		prestamos.remove(prestamoEC);

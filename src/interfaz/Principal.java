@@ -89,18 +89,48 @@ public class Principal {
 	}
 	
 	private void vNuevoPrestamo() {
-		NuevoPrestamo ventanaNuevoPrestamo = new NuevoPrestamo();
-		ventanaNuevoPrestamo.setVisible(true);
+		Controladora control = Controladora.getInstance();
+		if (control.getClientes().isEmpty()) {
+			JOptionPane.showMessageDialog(frame, "Debe haber al menos un cliente en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			NuevoPrestamo ventanaNuevoPrestamo = new NuevoPrestamo();
+			ventanaNuevoPrestamo.setVisible(true);	
+		}
 	}
 	
-	private void vModificarPrestamo() {
-		ModificarPrestamo ventanaModificarPrestamo = new ModificarPrestamo();
-		ventanaModificarPrestamo.setVisible(true);
+	private void vAgregarItemPrestamo() {
+		Controladora control = Controladora.getInstance();
+		DefaultTableModel model = (DefaultTableModel) prestamosTabla.getModel();
+		if (control.getPrestamos().isEmpty()) {
+			JOptionPane.showMessageDialog(frame, "Debe haber al menos un prestamo en el sistema para agregarle items", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int filer = prestamosTabla.getSelectedRow();
+			if (filer == -1) {
+				JOptionPane.showMessageDialog(frame, "Seleccione un prestamo!!", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				AgregarItemPrestamo ventanaAgregarItemPrestamo = new AgregarItemPrestamo(filer);
+				ventanaAgregarItemPrestamo.setVisible(true);
+			}
+		}
 	}
 	
 	private void vFinalizarPrestamo() {
-		FinalizarPrestamo ventanaFinalizarPrestamo = new FinalizarPrestamo();
-		ventanaFinalizarPrestamo.setVisible(true);
+		Controladora control = Controladora.getInstance();
+		DefaultTableModel model = (DefaultTableModel) prestamosTabla.getModel();
+		if (control.getPrestamos().isEmpty()) {
+			JOptionPane.showMessageDialog(frame, "Debe haber al menos un prestamo en el sistema para finalizarlo", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int filer = prestamosTabla.getSelectedRow();
+			if (filer == -1) {
+				JOptionPane.showMessageDialog(frame, "Seleccione un prestamo!!", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					control.finalizarPrestamo(filer);
+				} catch (Exception StarWalker) {
+					JOptionPane.showMessageDialog(frame, "Error al finalizar!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
 	}
 	
 	private void vReporteItems() {
@@ -681,30 +711,24 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				vNuevoPrestamo();
 				showearPrestamos();
+				showearClientes();
 			}
 		});
 		btnNuevoPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNuevoPrestamo.setBounds(347, 21, 120, 34);
 		prestamosP.add(btnNuevoPrestamo);
 		
-		JButton btnModificarPrestamo = new JButton("Modificar");
-		btnModificarPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnModificarPrestamo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				vModificarPrestamo();
-			}
-		});
-		btnModificarPrestamo.setBounds(347, 109, 120, 34);
-		prestamosP.add(btnModificarPrestamo);
-		
 		JButton btnFinalizarPrestamo = new JButton("Finalizar");
 		btnFinalizarPrestamo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				vFinalizarPrestamo();
+				showearPrestamos();
+				showearItems();
+				showearClientes();
 			}
 		});
 		btnFinalizarPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnFinalizarPrestamo.setBounds(347, 65, 120, 34);
+		btnFinalizarPrestamo.setBounds(347, 111, 120, 34);
 		prestamosP.add(btnFinalizarPrestamo);
 		
 		JButton btnGuardar = new JButton("Guardar Datos");
@@ -753,6 +777,18 @@ public class Principal {
 		prestamosTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		scrollPane_4.setViewportView(prestamosTabla);
+		
+		JButton btnAgregarPrestamo = new JButton("Agregar");
+		btnAgregarPrestamo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vAgregarItemPrestamo();
+				showearPrestamos();
+				showearItems();
+			}
+		});
+		btnAgregarPrestamo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnAgregarPrestamo.setBounds(347, 67, 120, 34);
+		prestamosP.add(btnAgregarPrestamo);
 		
 		JPanel reportesP = new JPanel();
 		tabbedPane.addTab("Reportes", null, reportesP, null);
